@@ -1,2 +1,2 @@
-# wacanda
+# wasabi
 Another way of doing things
