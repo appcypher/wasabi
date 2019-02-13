@@ -5,7 +5,13 @@
 current_dir=`pwd`
 
 # Get the absolute path of where script is running from
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd)"
+src="${BASH_SOURCE[0]}"
+while [ -h "$src" ]; do # resolve $src until the file is no longer a symlink
+  dir="$( cd -P "$( dirname "$src" )" >/dev/null 2>&1 && pwd )"
+  src="$(readlink "$src")"
+  [[ $src != /* ]] && src="$dir/$src" # if $src was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+script_dir="$(cd -P "$(dirname "$src" )" >/dev/null 2>&1 && pwd)"
 script_path="$script_dir/setup.sh"
 
 # RETURN VARIABLE
@@ -36,15 +42,15 @@ main() {
 #	Prints helpful information about the setup script
 help() {
     echo ""
-    echo "=============================================================="
-    echo "====================== WASABI MANAGER ========================"
-    echo "=============================================================="
-    echo "[USAGE] : wasabi [comand]"
-    echo "[COMMAND] :"
-    echo " > help               - prints this help message"
-    echo " > install            - builds project and exposes relevant commands"
-    echo " > uninstall          - removes build files and commands"
-    echo "=============================================================="
+    echo " ========================= WASABI  ============================"
+    echo "|                                                              |"
+    echo "| [USAGE] : wasabi [comand]                                    |"
+    echo "| [COMMAND] :                                                  |"
+    echo "|  • help       - prints this help message                     |"
+    echo "|  • install    - builds project and exposes relevant commands |"
+    echo "|  • uninstall  - removes build files and commands             |"
+    echo "|                                                              |"
+    echo " =============================================================="
     echo ""
 }
 
@@ -53,10 +59,14 @@ help() {
 #	Installs the wasabi project
 install() {
     local wasmception_dir="$script_dir/deps/wasmception"
+    local wacc_path="$script_dir/target/debug/wacc"
+    local waxx_path="$script_dir/target/debug/waxx"
+    local usr_prefix="/usr/local/bin"
 
     #--------------------------------------------------
 
-    displayln "build dependecies"
+    display "Build dependencies"
+    displayln "This may take a while"
     # Cd into wasmception directory
     cd $wasmception_dir
     # Build wasmception project
@@ -67,19 +77,28 @@ install() {
     #--------------------------------------------------
 
     # TODO: Seperate release build.
-    displayln "build wasabi project"
+    displayln "Build wasabi project"
     # Build cargo project.
     cargo build
 
     #--------------------------------------------------
 
-    displayln "make wasabi commands accessible system-wide"
+    displayln "Make wasabi commands accessible system-wide"
     # Make setup script executable
     chmod u+x $script_path
+
     # Add links to commands in /usr/local/bin
-    add_link "wacc" "$script_dir/target/debug/wacc"
-    add_link "wa++" "$script_dir/target/debug/waxx"
-    add_link "wasabi" "$script_path"
+    if [ ! -f "$usr_prefix/wacc" ]; then
+        add_link "wacc" $wacc_path
+    fi
+
+    if [ ! -f "$usr_prefix/wa++" ]; then
+        add_link "wa++" $waxx_path
+    fi
+
+    if [ ! -f "$usr_prefix/wasabi" ]; then
+        add_link "wasabi" $script_path
+    fi
 }
 
 # TODO: Refactor
@@ -98,7 +117,7 @@ uninstall() {
     #---------------- Remove cargo build --------------
     #--------------------------------------------------
 
-    displayln "remove command links"
+    displayln "Remove commands"
     remove_link "wacc"
     remove_link "wa++"
     remove_link "wasabi"
@@ -107,12 +126,12 @@ uninstall() {
 # DESCRIPTION:
 #	Adds a symbolic link to files in `/usr/local/bin`
 add_link() {
-    if [[ -z $1 ]]; then
+    if [ -z $1 ]; then
         echo "You need to specify link name!"
         exit 1
     fi
 
-    if [[ -z $2 ]]; then
+    if [ -z $2 ]; then
         echo "You need to specify the file you want to link to!"
         exit 1
     fi
@@ -121,17 +140,16 @@ add_link() {
     ln -s $2 /usr/local/bin/$1
 }
 
-
 # DESCRIPTION:
 #   Removes a symbolic link from `/usr/local/bin`
 remove_link() {
-    if [[ -z $1 ]]; then
+    if [ -z $1 ]; then
         echo "You need to provide the symbolic file to delete!"
         exit 1
     fi
 
     # displayln "Check that file is a link"
-    if [[ ! -L "/usr/local/bin/$1" ]]; then
+    if [ ! -L "/usr/local/bin/$1" ]; then
         echo "What you specified is not a symbolic link!"
         exit 1
     fi
@@ -140,23 +158,31 @@ remove_link() {
     rm /usr/local/bin/$1
 }
 
+# DESCRIPTION:
+#	Displays a message with multiple trainling newlines
+displayln() {
+    printf "\n:::: $1 ::::\n\n"
+}
 
 # DESCRIPTION:
 #	Displays a message
-displayln() {
-    printf "\n::: $1 :::\n"
+display() {
+    printf "\n:::: $1 ::::\n"
 }
 
 # DESCRIPTION:
 #	Asks the user for confirmation befor proceeding
 confirm() {
-	printf "\n::: Are you sure you want to $1? [Y/n] "
+	printf "\n:::: Are you sure you want to $1? [Y/n] "
 
 	read response
 
-	if [[ $response = "Y" ]]; then
+	if [ $response = "Y" ]; then
 		return 1
 	else
 		return 0
 	fi
 }
+
+# Start main
+main $@
