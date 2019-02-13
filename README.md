@@ -1,37 +1,51 @@
-# wasabi (another way of doing things)
+<div align="center">
+    <a href="#" target="_blank">
+        <img src="https://github.com/appcypher/wasabi/blob/master/media/wasabi.png" alt="Wasabi Logo" width="140" height="140"></img>
+    </a>
+</div>
+
+<h1 align="center">WASABI</h1>
+
 Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from C/C++ code.
 
-## BUILDING THE PROJECT
+### BUILDING THE PROJECT
+
 #### BSD (macOS, ...) and Linux
-- Clone the repositry and its submodules
+- Clone the repository and its submodules.
     ```bash
-    git clone --recurse-modules https://github.com/appcypher/wasabi.git
+    git clone --recurse-submodules https://github.com/appcypher/wasabi.git
     ```
 
     ```bash
     cd wasabi
-    ````
-- Build the `wasmception` projec and its dependencies.
+    ```
+- Wasabi is a [rust](https://www.rust-lang.org) project so it depends on `rustc` and `cargo`.
+
+    ```bash
+    curl https://sh.rustup.rs -sSf | sh
+    ```
+
+- Build `wasabi` and its dependencies.
     ```bash
     sudo sh setup.sh install
     ```
+    This command does the following
+    - clones the [`llvm`](https://llvm.org/) repository and builds it using steps defined in `wasmception`. This step may take a while.
+    - clones `musl` repository.
+    - builds the `wasabi` project.
+    - installs necessary commands like `wacc`, `wa++` and `wasabi`.
 
-    This should install necessary commands like `wacc`, `wa++` and `wasabi`.
-
-- After a successful install you should be able to use the `setup.sh` script via the wasabi command.
+- After a successful install you should be able to use the `setup.sh` script through the `wasabi` command.
     ```bash
-    wasabi install
+    wasabi --help
     ```
 
-    ```bash
-    wasabi uninstall
-    ```
-
-
+#### TODO
+- Replace llvm git clone in `wasmception` with downloading `.tar.gz`s from [llvm download site](https://releases.llvm.org/download.html). The clone thing is stupid slow.
 
 #### Windows
 - N/A
 
 ### ATTRIBUTIONS
 - [wasmception](https://github.com/yurydelendik/wasmception) - needed for getting and necessary lib and
-- freepik -
+- [freepik](https://www.freepik.com/) - wasabi current logo
