@@ -1,0 +1,5 @@
+[package]
+name = "wasabi-generator"
+version = "0.1.0"
+authors = ["Steve Akinyemi <appcypher@outlook.com>"]
+edition = "2018"

@@ -1,3 +1,3 @@
 fn main() {
-    println!("wa++ command says hi!");
+    println!("\n=== [ wa++ command says hi! ] ===\n");
 }

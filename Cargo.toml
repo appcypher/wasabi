@@ -5,8 +5,8 @@ authors = ["Steve Akinyemi <appcypher@outlook.com>"]
 edition = "2018"
 
 [[bin]]
-name = "wac"
-path = "bin/wac.rs"
+name = "wacc"
+path = "bin/wacc.rs"
 
 [[bin]]
 name = "waxx" # Cargo doesn't like `wa++` :/
