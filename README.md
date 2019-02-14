@@ -27,7 +27,7 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
 
 - Build `wasabi` and its dependencies.
     ```bash
-    sudo sh setup.sh install
+    bash setup.sh install
     ```
     This command does the following:
     - clones the [`llvm`](https://llvm.org/) repository and builds it using steps defined in `wasmception`. This step may take a while.
