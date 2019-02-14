@@ -2,6 +2,7 @@
 name = "wasabi"
 version = "0.0.1"
 authors = ["Steve Akinyemi <appcypher@outlook.com>"]
+license = "Apache-2.0"
 edition = "2018"
 #-----------------------------------------
 description = "A crate that generates bindings and wrappers for wasabi-generated wasm files"
