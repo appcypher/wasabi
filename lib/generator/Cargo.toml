@@ -1,5 +1,16 @@
 [package]
 name = "wasabi-generator"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["Steve Akinyemi <appcypher@outlook.com>"]
 edition = "2018"
+#-----------------------------------------
+description = "A crate trying to be an alternative to Emscripten"
+readme = "README.md"
+repository = "https://github.com/appcypher/wasabi"
+keywords = ["c", "c++", "webassembly", "abi", "emscripten"]
+categories = ["development-tools", "parser-implementations", "wasm"]
+documentation = "https://github.com/appcypher/wasabi"
+homepage = "https://github.com/appcypher/wasabi"
+
+[dependencies]
+wasmlite-parser = "0.0.1"
