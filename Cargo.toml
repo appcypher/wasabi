@@ -5,7 +5,7 @@ authors = ["Steve Akinyemi <appcypher@outlook.com>"]
 license = "Apache-2.0"
 edition = "2018"
 #-----------------------------------------
-description = "A crate that generates bindings and wrappers for wasabi-generated wasm files"
+description = "A crate trying to be an alternative to Emscripten"
 readme = "README.md"
 repository = "https://github.com/appcypher/wasabi"
 keywords = ["c", "cpp", "webassembly", "abi", "emscripten"]
