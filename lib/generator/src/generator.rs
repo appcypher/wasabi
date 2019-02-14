@@ -1,8 +1,8 @@
 use wasmlite_parser::{
-    export_section,
-}
+    parser,
+};
 
-/// Parses a wasm file and get the exports
+/// Parses a wasm file and gets the exports
 fn get_wasm_export(filename: String) {
     // TODO
 }
