@@ -54,5 +54,5 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
 - N/A
 
 ### ATTRIBUTIONS
-- [wasmception](https://github.com/yurydelendik/wasmception) - needed for getting and necessary lib and
+- [wasmception](https://github.com/yurydelendik/wasmception) - needed for installing llvm and getting libs/abis.
 - [freepik](https://www.freepik.com/) - wasabi current logo
