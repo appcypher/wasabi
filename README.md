@@ -29,7 +29,7 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
     ```bash
     sudo sh setup.sh install
     ```
-    This command does the following
+    This command does the following:
     - clones the [`llvm`](https://llvm.org/) repository and builds it using steps defined in `wasmception`. This step may take a while.
     - clones `musl` repository.
     - builds the `wasabi` project.
@@ -40,8 +40,15 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
     wasabi --help
     ```
 
-#### TODO
-- Replace llvm git clone in `wasmception` with downloading `.tar.gz`s from [llvm download site](https://releases.llvm.org/download.html). The clone thing is stupid slow.
+- Use `wacc` or `wa++` command
+    ```bash
+    wacc test.c -o test.wasm
+    ```
+
+    ```bash
+    wa++ test.cpp -o test.wasm -Wl,--export=func --gen=web
+    ```
+
 
 #### Windows
 - N/A
