@@ -6,7 +6,7 @@ edition = "2018"
 license = "Apache-2.0"
 #-----------------------------------------
 description = "A crate that generates bindings and wrappers for wasabi-generated wasm files"
-readme = "README.md"
+readme = "../../README.md"
 repository = "https://github.com/appcypher/wasabi"
 keywords = ["c", "cpp", "webassembly", "abi", "emscripten"]
 categories = ["development-tools", "parser-implementations", "wasm"]
