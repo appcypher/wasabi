@@ -8,7 +8,7 @@ pub fn get_clang_wasm_flags() -> Vec<String> {
         String::from("-nostartfiles"),
         // TODO: --no-threads is here temporarily to stop clang from crashing sometimes.
         // TODO: Add flag option to determine if entry is needed. Can be a side_module as in Emscripten.
-        String::from("-Wl,--entry=main,--export=main,--no-threads"),
+        String::from("-Wl,--entry=main,--export=main,--export=malloc,--no-threads"),
     ]
 }
 
@@ -17,7 +17,7 @@ pub fn get_clangxx_wasm_flags() -> Vec<String> {
         String::from("-nostartfiles"),
         // TODO: --no-threads is here temporarily to stop clang from crashing sometimes.
         // TODO: Add flag option to determine if entry is needed. Can be a side_module as in Emscripten.
-        String::from("-Wl,--entry=main,--export=main,--no-threads"),
+        String::from("-Wl,--entry=main,--export=main,--export=malloc,--no-threads"),
         // TODO: -fno-exceptions is added by default for now.
         String::from("-fno-exceptions"),
     ]
