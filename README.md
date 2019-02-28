@@ -6,7 +6,7 @@
 
 <h1 align="center">WASABI</h1>
 
-Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from C/C++ code.
+Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from C/C++ code. Generated wasm files have a LLVM/wasm32 ABI.
 
 ### BUILDING THE PROJECT
 
