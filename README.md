@@ -12,6 +12,7 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
 
 #### BSD (macOS, ...) and Linux
 - Clone the repository and its submodules.
+
     ```bash
     git clone --recurse-submodules https://github.com/appcypher/wasabi.git
     ```
@@ -26,6 +27,7 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
     ```
 
 - Build `wasabi` and its dependencies.
+
     ```bash
     bash setup.sh install
     ```

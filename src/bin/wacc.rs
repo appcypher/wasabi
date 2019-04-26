@@ -60,7 +60,7 @@ fn main() {
         clang_args.push(sysroot_flag);
 
         // NOTE: Had to append the wasm-specific flags after sysroot flags, otherwise
-        // they may not acknowledged.
+        // they may not be acknowledged.
         // Append wasm-specific flags
         clang_args.append(&mut get_clang_wasm_flags());
     }

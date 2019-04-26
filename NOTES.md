@@ -1,3 +1,32 @@
+### WHAT IS WASABI?
+- Wasabi is a `wasm32-llvm-linux` project.
+- Wasabi is forward-facing and wasm-focused.
+- Wasabi will support wasm-web interop via hostbindings apis.
+
+### WINDOWS SUPPORT
+- Statically analyze syscalls that are embedded in code.
+- Creating a detailed `mapping structure`.
+- Some examples of POSIX API
+    ```
+    [ FILES ]
+    - open
+    - openat
+    - close
+
+    [ NETWORK ]
+    - socket
+    - setsockopt
+
+    [ DYNAMIC LIBRARY ]
+    - dlopen
+    ```
+
+- CAVEATS
+    - Separated continuation like `select/epoll`
+    - Unmappable syscalls like `ioctl`
+
+
+
 ### ISSUES
 - Replace llvm git clone in `wasmception` with downloading `.tar.gz`s from [llvm download site](https://releases.llvm.org/download.html). The clone thing is stupid slow.
 
