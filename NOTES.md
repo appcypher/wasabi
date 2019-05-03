@@ -1,7 +1,92 @@
 ### WHAT IS WASABI?
-- Wasabi is a `wasm32-llvm-linux` project.
-- Wasabi is forward-facing and wasm-focused.
-- Wasabi will support wasm-web interop via hostbindings apis.
+- Wasabi is a WebAssembly toolchain for compiling C/C++ projects to WebAssembly, modifying WebAssembly files and generating bindings for running WebAssembly files.
+
+
+
+
+### WHY WASABI?
+- Wasabi focuses solely on LLVM and WebAssembly toolchain and tries to use them with little modifications.
+- Wasabi aims to support bindings for known runtimes via plugins.
+- ...
+
+
+
+### COMPILATION
+- LLVM 8+
+- compiler-rt
+- libcxx
+- libcxxabi
+- Musl
+
+
+
+
+
+### ENV
+##### IMPORTANT
+- `CC` → wacc | emcc
+- `CXX` → wa++ | em++
+- `LD` → lld
+- `CFLAGS` → ... | [empty]
+- `CXXFLAGS` → ... | [empty]
+
+##### ESOTERIC
+- `AR` → llvm-ar | emar
+- `CROSS_COMPILE` → ... | em
+- `NM` → llvm-nm
+- `LDSHARED` → ... | emcc
+- `RANLIB` → llvm-ranlib | emranlib
+
+##### FALLBACK
+- `HOST_CC` → ... | clang
+- `HOST_CXX` → ... | clang++
+- `HOST_CFLAGS` → ... | -W
+- `HOST_CXXFLAGS` → ... | -W
+
+### CLI
+##### WASABI
+- Commands
+    ```bash
+    wasabi [--help]
+    wasabi shell
+    wasabi run [COMMAND]
+    wasabi c++ [ARGS]
+    wasabi cc [ARGS]
+    wasabi opt [FILE]
+    wasabi convert [SOURCE] -o [DESTINATION]
+    wasabi link [FILES]
+    ```
+
+- Usage examples
+
+    ```bash
+    wasabi shell
+    ```
+
+    ```bash
+    wasabi run ./configure
+    ```
+
+##### WACC / WA++
+
+- Usage examples
+
+    ```bash
+    wacc test.c -o test.wasm
+    ```
+
+    ```bash
+    wa++ test.cpp -o test.wasm -Wl,--export=func --gen=web
+    ```
+
+
+### OPTIMIZATION
+- Import tree shaking - only generates referenced imports.
+- Using binaryen to get even further wasm-specific optimizations.
+
+
+
+
 
 ### WINDOWS SUPPORT
 - Statically analyze syscalls that are embedded in code.
@@ -24,6 +109,37 @@
 - CAVEATS
     - Separated continuation like `select/epoll`
     - Unmappable syscalls like `ioctl`
+
+
+
+
+
+### CUSTOM  SECTION
+##### HOST BINDING SECTION
+- Target triple definition (Cranelift style)
+- Payload structure
+    ```
+    section_id               - varuint7  = 0
+
+    payload_length           - varuint32
+
+    name_length              - varuint32 = 13
+    name_string              - uint8*    = "host-bindings"
+
+    target_triple_length     - varuint32
+    target_architecture      - uint8
+    target_vendor            - varuint32
+    target_operating_system  - varuint32
+
+    import_count             - varuint32
+    import_index             - varuint32* (field index in import section)
+    ```
+- The host-binding section can be placed before or after any other section
+- There can only be one host-binding section in wasm file
+
+
+
+
 
 
 

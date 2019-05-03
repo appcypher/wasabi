@@ -13,5 +13,8 @@ categories = ["development-tools", "parser-implementations", "wasm"]
 documentation = "https://github.com/appcypher/wasabi"
 homepage = "https://github.com/appcypher/wasabi"
 
+[dependencies]
+clap = "2.33"
+
 [features]
 debug = []

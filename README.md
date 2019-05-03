@@ -51,7 +51,6 @@ Wasabi is supposed to be a WebAssembly-focused way of generating wasm files from
     wa++ test.cpp -o test.wasm -Wl,--export=func --gen=web
     ```
 
-
 #### Windows
 - N/A
 
