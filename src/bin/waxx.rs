@@ -1,3 +1,4 @@
+//! TODO: Expects a -fno-exceptions flag
 //! This file manages arguments that are expected to be passed to the clang++ command.
 
 #![macro_use]
@@ -7,6 +8,7 @@ use std::env;
 
 use wasabi::common::{call_clang, get_clangxx_wasm_flags, WASABI_SPECIFIC_ARGS};
 
+//
 fn main() {
     println!("\n=== [ wa++ ] ===\n");
 

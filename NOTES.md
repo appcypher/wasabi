@@ -112,37 +112,6 @@
 
 
 
-
-
-### CUSTOM  SECTION
-##### HOST BINDING SECTION
-- Target triple definition (Cranelift style)
-- Payload structure
-    ```
-    section_id               - varuint7  = 0
-
-    payload_length           - varuint32
-
-    name_length              - varuint32 = 13
-    name_string              - uint8*    = "host-bindings"
-
-    target_triple_length     - varuint32
-    target_architecture      - uint8
-    target_vendor            - varuint32
-    target_operating_system  - varuint32
-
-    import_count             - varuint32
-    import_index             - varuint32* (field index in import section)
-    ```
-- The host-binding section can be placed before or after any other section
-- There can only be one host-binding section in wasm file
-
-
-
-
-
-
-
 ### ISSUES
 - Replace llvm git clone in `wasmception` with downloading `.tar.gz`s from [llvm download site](https://releases.llvm.org/download.html). The clone thing is stupid slow.
 
