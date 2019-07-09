@@ -45,11 +45,12 @@ pub fn get_clang_wasm_flags(exports: Option<Vec<String>>, is_executable: bool) -
     };
 
     vec![
-        // No start section.
+        // TODO: Link in reference to printf, sprintf. To be implemented by VM.
+        // No system startup files. No _start, _ini, _fini
         String::from("-nostartfiles"),
         // Clang currenly crashes with threads enabled.
         String::from("-Wl,--no-threads"),
-        // Ideally malloc and co should nbe exported.
+        // Ideally malloc and co should be exported.
         String::from("-Wl,--export=malloc"),
         // Main flag, if there is any.
         main_flag,
